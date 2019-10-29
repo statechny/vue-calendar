@@ -62,14 +62,13 @@ export default {
   },
   beforeCreate() {
     SetData.setDataToStorage();
-    this.events = JSON.parse(localStorage.getItem('events')).events;
   },
   data() {
     return {
       date: DATE.getDate(),
       month: DATE.getMonth(),
       year: DATE.getFullYear(),
-      events: [],
+      events: JSON.parse(localStorage.getItem('events')).events,
     };
   },
   computed: {

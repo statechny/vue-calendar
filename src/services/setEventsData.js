@@ -1,3 +1,7 @@
 import lockedData from './events.json';
 
-localStorage.setItem('events', JSON.stringify(lockedData));
+export default {
+  setDataToStorage() {
+    localStorage.setItem('events', JSON.stringify(lockedData));
+  },
+};

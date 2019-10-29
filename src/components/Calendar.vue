@@ -21,6 +21,7 @@
 
 <script>
 import formatDate from '../helpers/formatDate';
+import SetData from '../services/setEventsData';
 
 import DayBox from './DayBox.vue';
 import Controls from './Controls.vue';
@@ -59,12 +60,16 @@ export default {
     Controls,
     Header,
   },
+  beforeCreate() {
+    SetData.setDataToStorage();
+    this.events = JSON.parse(localStorage.getItem('events')).events;
+  },
   data() {
     return {
       date: DATE.getDate(),
       month: DATE.getMonth(),
       year: DATE.getFullYear(),
-      events: JSON.parse(localStorage.getItem('events')).events,
+      events: [],
     };
   },
   computed: {

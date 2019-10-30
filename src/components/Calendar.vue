@@ -13,7 +13,7 @@
         :key="singleDay.id"
         :text='{day: singleDay.day, date: singleDay.date}'
         :events='singleDay.events'
-        :currentDay='currentDay(singleDay.date)'
+        :currentDay='currentDay(singleDay.id)'
       />
     </div>
   </div>
@@ -116,7 +116,7 @@ export default {
         days.push({
           day: DAYS_OF_WEEK[current.getDay() ? current.getDay() - 1 : 6],
           date: current.getDate(),
-          id: +current,
+          id: +current.setHours(0, 0, 0, 0),
           events:
             this.events.find(event => event.date.split(' ')[0] === formatDate(current)),
         });
@@ -129,7 +129,7 @@ export default {
         days.push({
           day: (days.length) < 7 ? dayName : '',
           date: date.getDate(),
-          id: +date,
+          id: +date.setHours(0, 0, 0, 0),
           events:
             this.events.find(event => event.date.split(' ')[0] === formatDate(date)),
         });
@@ -140,7 +140,7 @@ export default {
         days.push({
           day: '',
           date: date.getDate(),
-          id: +date,
+          id: +date.setHours(0, 0, 0, 0),
           events:
             this.events.find(event => event.date.split(' ')[0] === formatDate(date)),
         });
@@ -148,10 +148,8 @@ export default {
       }
       return days;
     },
-    currentDay(day) {
-      return (DATE.getFullYear() === this.year
-        && DATE.getMonth() === this.month
-        && DATE.getDate() === day);
+    currentDay(id) {
+      return (id === new Date().setHours(0, 0, 0, 0));
     },
   },
 };

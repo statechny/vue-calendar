@@ -100,10 +100,10 @@ export default {
     getCurrentDays() {
       const days = [];
       const date = new Date();
+      date.setDate(1);
       date.setMonth(this.month);
       date.setFullYear(this.year);
       // calculate days of prev months
-      date.setDate(1);
       const startDay = !date.getDay() ? 7 : date.getDay();
       const lastDayPrevMonth = new Date(date.getFullYear(), date.getMonth(), 0);
       for (let i = 0, l = startDay - 1; i < l; i += 1) {
